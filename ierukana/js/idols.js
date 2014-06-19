@@ -1,4 +1,4 @@
-{
+var jsonData = {
 "idols": [
 {"id":1,"attr":"cu","full_name":"島村卯月","full_name_kana":"しまむらうづき","first_name":"島村","first_name_kana":"しまむら","last_name":"卯月","last_name_kana":"うづき"},
 {"id":2,"attr":"cu","full_name":"中野有香","full_name_kana":"なかのゆか","first_name":"中野","first_name_kana":"なかの","last_name":"有香","last_name_kana":"ゆか"},
@@ -195,4 +195,4 @@
 {"id":195,"attr":"pa","full_name":"双海亜美","full_name_kana":"ふたみあみ","first_name":"双海","first_name_kana":"ふたみ","last_name":"亜美","last_name_kana":"あみ"},
 {"id":196,"attr":"pa","full_name":"星井美希","full_name_kana":"ほしいみき","first_name":"星井","first_name_kana":"ほしい","last_name":"美希","last_name_kana":"みき"}
 ]
-}
+};
