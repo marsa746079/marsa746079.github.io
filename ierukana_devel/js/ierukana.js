@@ -190,8 +190,8 @@ ImasCg.Ierukana = function () {
 
 		var idols = getIdolByName(answer, compare_mode);
 
-		if (idols) {
-			var idol = idols.some(function(v){ return !v.answered; });
+		if (idols.length > 0) {
+			var idol = idols.filter(function(v){ return !v.answered; }).first();
 			if (idol) {
 				$('#' + idol.id).addClass('answered').text(idol.full_name);
 				idol.answered = true;
