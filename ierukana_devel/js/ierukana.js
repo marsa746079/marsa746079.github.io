@@ -188,11 +188,11 @@ ImasCg.Ierukana = function () {
 		var answer = $('#answer-text').val();
 		answer = answer.replace('・', '');
 
-		var idols = getIdolByName(answer, compare_mode);
-
-		if (idols.length > 0) {
-			var idol = idols.filter(function(v){ return !v.answered; }).first();
-			if (idol) {
+		var idolsHitName = getIdolByName(answer, compare_mode);
+		if (idolsHitName.length > 0) {
+			var idolsNotAnswered = idols.filter(function(v){ return !v.answered; });
+			if (idolsNotAnswered.length > 0) {
+				var idol = idolsNotAnswered[0];
 				$('#' + idol.id).addClass('answered').text(idol.full_name);
 				idol.answered = true;
 				lastIdolName = idol.full_name;
