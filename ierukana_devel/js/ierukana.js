@@ -140,11 +140,9 @@ ImasCg.Ierukana = function () {
 
 	var countUpStart = function () {
 		var nextUnixTime = parseInt((new Date) / 1);
-		var wTime;
+		var wTime = (nextUnixTime - startUnixTime) % 60000;
 		var minutes = (nextUnixTime - startUnixTime) / 60000;
-		wTime = (nextUnixTime - startUnixTime) % 60000;
 		var second = (wTime / 1000);
-
 		var milliSecond = Math.floor((second * 100)) % 100;
 		second = Math.floor(second);
 		minutes = Math.floor(minutes);
@@ -177,7 +175,7 @@ ImasCg.Ierukana = function () {
 				+ (numOfIdols['all'] - numOfRemains['all'])
 				+ '人のアイドルを言うことができました。'
 				+ oneForgetIdol.full_name + ' 等、' + numOfRemains['all']
-				+ '人の名前を言えませんでした。 精進しましょう。';
+				+ '人の名前を言えませんでした。精進しましょう。';
 		}
 		var resultTweet = 'https://twitter.com/intent/tweet?hashtags=シンデレラガールズ言えるかな&text='
 		resultTweet = resultTweet + tweetText + SITE_URL;
