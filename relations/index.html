@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<title>im@scg relation chart</title>
+<meta charset="utf-8">
+<style>
+p {
+  font-size: 90%;
+}
+
+div.title {
+  float: left;
+  width: 400px;
+}
+
+div.tweet-btn {
+  float: left;
+  width: 200px;
+}
+
+div.twt
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.text {
+  stroke: #000;
+  stroke-width: 1;
+  font-size: 70%;
+  font-family: "メイリオ";
+}
+
+</style>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="./js/imascg-relation.js"></script>
+<body>
+<h3>im@s-cg relations chart　　<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://marsa746079.github.io/relations/" data-text="im@s-cg relations chart" data-lang="ja" data-hashtags="">ツイート</a></h3>
+<script>
+	! function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+		if (!d.getElementById(id)) {
+			js = d.createElement(s);
+			js.id = id;
+			js.src = p + '://platform.twitter.com/widgets.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		}
+	}(document, 'script', 'twitter-wjs');
+</script>
+</div>
+<p><a href="http://seesaawiki.jp/imascg/" target="_blank">アイドルマスターシンデレラガールズwiki</a>に載ってる台詞を解析してアイドルの絡みをグラフ化したもの。精度はお察し下さい。</p>
+<div id="search">
+ベース人物：<select id="search-list">
+	<option value="1001">島村卯月</option>
+	<option value="1002">中野有香</option>
+	<option value="1003">水本ゆかり</option>
+	<option value="1004">福山舞</option>
+	<option value="1005">椎名法子</option>
+	<option value="1006">今井加奈</option>
+	<option value="1007">持田亜里沙</option>
+	<option value="1008">三村かな子</option>
+	<option value="1009">奥山沙織</option>
+	<option value="1010">間中美里</option>
+	<option value="1011">小日向美穂</option>
+	<option value="1012">緒方智絵里</option>
+	<option value="1013">五十嵐響子</option>
+	<option value="1014">柳瀬美由紀</option>
+	<option value="1015">櫻井桃華</option>
+	<option value="1016">江上椿</option>
+	<option value="1017">長富蓮実</option>
+	<option value="1018">横山千佳</option>
+	<option value="1019">関裕美</option>
+	<option value="1020">太田優</option>
+	<option value="1021">棟方愛海</option>
+	<option value="1022">藤本里奈</option>
+	<option value="1023">大原みちる</option>
+	<option value="1024">遊佐こずえ</option>
+	<option value="1025">前川みく</option>
+	<option value="1026">赤西瑛梨華</option>
+	<option value="1027">松原早耶</option>
+	<option value="1028">相原雪乃</option>
+	<option value="1029">宮本フレデリカ</option>
+	<option value="1030">小早川紗枝</option>
+	<option value="1031">西園寺琴歌</option>
+	<option value="1032">双葉杏</option>
+	<option value="1033">楊菲菲</option>
+	<option value="1034">桃井あずき</option>
+	<option value="1035">涼宮星花</option>
+	<option value="1036">月宮雅</option>
+	<option value="1037">兵藤レナ</option>
+	<option value="1038">道明寺歌鈴</option>
+	<option value="1039">柳清良</option>
+	<option value="1040">井村雪菜</option>
+	<option value="1041">日下部若葉</option>
+	<option value="1042">榊原里美</option>
+	<option value="1043">輿水幸子</option>
+	<option value="1044">安斎都</option>
+	<option value="1045">浅野風香</option>
+	<option value="1046">大西由里子</option>
+	<option value="1047">安部菜々</option>
+	<option value="1048">工藤忍</option>
+	<option value="1049">栗原ネネ</option>
+	<option value="1050">古賀小春</option>
+	<option value="1051">クラリス</option>
+	<option value="1052">佐久間まゆ</option>
+	<option value="1053">村松さくら</option>
+	<option value="1054">丹羽仁美</option>
+	<option value="1055">白菊ほたる</option>
+	<option value="1056">早坂美玲</option>
+	<option value="1057">有浦柑奈</option>
+	<option value="1058">大沼くるみ</option>
+	<option value="1059">一ノ瀬志希</option>
+	<option value="1060">乙倉悠貴</option>
+	<option value="1061">原田美世</option>
+	<option value="1062">池袋晶葉</option>
+	<option value="1996">天海春香</option>
+	<option value="1997">菊地真</option>
+	<option value="1998">高槻やよい</option>
+	<option value="1999">我那覇響</option>
+	<option value="2001">渋谷凛</option>
+	<option value="2002">黒川千秋</option>
+	<option value="2003">松本沙理奈</option>
+	<option value="2004">桐野アヤ</option>
+	<option value="2005">高橋礼子</option>
+	<option value="2006">相川千夏</option>
+	<option value="2007">川島瑞樹</option>
+	<option value="2008">神谷奈緒</option>
+	<option value="2009">上条春菜</option>
+	<option value="2010">荒木比奈</option>
+	<option value="2011">東郷あい</option>
+	<option value="2012">多田李衣菜</option>
+	<option value="2013">水木聖來</option>
+	<option value="2014">佐々木千枝</option>
+	<option value="2015">三船美優</option>
+	<option value="2016">服部瞳子</option>
+	<option value="2017">木場真奈美</option>
+	<option value="2018">藤原肇</option>
+	<option value="2019">新田美波</option>
+	<option value="2020">水野翠</option>
+	<option value="2021">橘ありす</option>
+	<option value="2022">鷺沢文香</option>
+	<option value="2023">八神マキノ</option>
+	<option value="2024">ライラ</option>
+	<option value="2025">ヘレン</option>
+	<option value="2026">松永涼</option>
+	<option value="2027">小室千奈美</option>
+	<option value="2028">高峯のあ</option>
+	<option value="2029">高垣楓</option>
+	<option value="2030">神崎蘭子</option>
+	<option value="2031">伊集院惠</option>
+	<option value="2032">柊志乃</option>
+	<option value="2033">北条加蓮</option>
+	<option value="2034">ケイト</option>
+	<option value="2035">瀬名詩織</option>
+	<option value="2036">綾瀬穂乃香</option>
+	<option value="2037">佐城雪美</option>
+	<option value="2038">篠原礼</option>
+	<option value="2039">和久井留美</option>
+	<option value="2040">吉岡沙紀</option>
+	<option value="2041">梅木音葉</option>
+	<option value="2042">白坂小梅</option>
+	<option value="2043">岸部彩華</option>
+	<option value="2044">氏家むつみ</option>
+	<option value="2045">西川保奈美</option>
+	<option value="2046">成宮由愛</option>
+	<option value="2047">藤居朋</option>
+	<option value="2048">塩見周子</option>
+	<option value="2049">脇山珠美</option>
+	<option value="2050">岡崎泰葉</option>
+	<option value="2051">速水奏</option>
+	<option value="2052">大石泉</option>
+	<option value="2053">松尾千鶴</option>
+	<option value="2054">森久保乃々</option>
+	<option value="2055">アナスタシア</option>
+	<option value="2056">大和亜季</option>
+	<option value="2057">結城晴</option>
+	<option value="2058">二宮飛鳥</option>
+	<option value="2059">浅利七海</option>
+	<option value="2060">古澤頼子</option>
+	<option value="2061">望月聖</option>
+	<option value="2062">鷹富士茄子</option>
+	<option value="2063">桐生つかさ</option>
+	<option value="2996">如月千早</option>
+	<option value="2997">三浦あずさ</option>
+	<option value="2998">四条貴音</option>
+	<option value="2999">秋月律子</option>
+	<option value="3001">本田未央</option>
+	<option value="3002">高森藍子</option>
+	<option value="3003">並木芽衣子</option>
+	<option value="3004">龍崎薫</option>
+	<option value="3005">木村夏樹</option>
+	<option value="3006">松山久美子</option>
+	<option value="3007">斉藤洋子</option>
+	<option value="3008">沢田麻理菜</option>
+	<option value="3009">矢口美羽</option>
+	<option value="3010">赤城みりあ</option>
+	<option value="3011">愛野渚</option>
+	<option value="3012">真鍋いつき</option>
+	<option value="3013">大槻唯</option>
+	<option value="3014">姫川友紀</option>
+	<option value="3015">喜多見柚</option>
+	<option value="3016">上田鈴帆</option>
+	<option value="3017">海老原菜帆</option>
+	<option value="3018">及川雫</option>
+	<option value="3019">小関麗奈</option>
+	<option value="3020">衛藤美紗希</option>
+	<option value="3021">星輝子</option>
+	<option value="3022">片桐早苗</option>
+	<option value="3023">堀裕子</option>
+	<option value="3024">西島櫂</option>
+	<option value="3025">的場梨沙</option>
+	<option value="3026">相葉夕美</option>
+	<option value="3027">野々村そら</option>
+	<option value="3028">浜川愛結奈</option>
+	<option value="3029">若林智香</option>
+	<option value="3030">城ヶ崎美嘉</option>
+	<option value="3031">城ヶ崎莉嘉</option>
+	<option value="3032">仙崎恵磨</option>
+	<option value="3033">日野茜</option>
+	<option value="3034">諸星きらり</option>
+	<option value="3035">十時愛梨</option>
+	<option value="3036">ナターリア</option>
+	<option value="3037">相馬夏美</option>
+	<option value="3038">槙原志保</option>
+	<option value="3039">向井拓海</option>
+	<option value="3040">市原仁奈</option>
+	<option value="3041">杉坂海</option>
+	<option value="3042">喜多日菜子</option>
+	<option value="3043">北川真尋</option>
+	<option value="3044">メアリー・コクラン</option>
+	<option value="3045">小松伊吹</option>
+	<option value="3046">三好紗南</option>
+	<option value="3047">キャシー・グラハム</option>
+	<option value="3048">難波笑美</option>
+	<option value="3049">浜口あやめ</option>
+	<option value="3050">村上巴</option>
+	<option value="3051">土屋亜子</option>
+	<option value="3052">首藤葵</option>
+	<option value="3053">冴島清美</option>
+	<option value="3054">財前時子</option>
+	<option value="3055">佐藤心</option>
+	<option value="3056">依田芳乃</option>
+	<option value="3057">南条光</option>
+	<option value="3058">イヴ・サンタクロース</option>
+	<option value="3901">トレーナー</option>
+	<option value="3902">ルーキートレーナー</option>
+	<option value="3903">ベテラントレーナー</option>
+	<option value="3904">マスタートレーナー</option>
+	<option value="3995">萩原雪歩</option>
+	<option value="3996">水瀬伊織</option>
+	<option value="3997">双海真美</option>
+	<option value="3998">双海亜美</option>
+	<option value="3999">星井美希</option>
+	<option value="9999">千川ちひろ</option>
+</select>
+再帰レベル：<select id="recursive">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+</select>
+</div>
+<div id="chart"></div>
+</body>
+
+</html>
